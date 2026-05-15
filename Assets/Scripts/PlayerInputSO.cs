@@ -1,0 +1,67 @@
+using System;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+
+[CreateAssetMenu(fileName = "PlayerInputSO", menuName = "SO/PlayerInput")]
+public class PlayerInputSO : ScriptableObject, PInput.IPlayerActions
+{
+    public event Action eventAttack;
+    public event Action eventCrouch;
+    public event Action eventJump;
+    public event Action eventSprint;
+
+    private PInput pinput;
+    public Vector2 moveDirection { get; private set; }
+    public Vector2 lookDelta { get; private set; }
+
+    public void OnEnable()
+    {
+        if (pinput == null)
+        {
+            pinput = new PInput();
+            pinput.Player.SetCallbacks(this);
+        }
+
+        pinput.Player.Enable();
+    }
+
+    public void OnDisable()
+    {
+        if(pinput != null) pinput.Player.Disable();
+    }
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        moveDirection = context.ReadValue<Vector2>();
+    }
+
+    public void OnLook(InputAction.CallbackContext context)
+    {
+        lookDelta = context.ReadValue<Vector2>();
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed) eventAttack?.Invoke();
+    }
+
+    public void OnCrouch(InputAction.CallbackContext context)
+    {
+        if (context.performed) eventCrouch?.Invoke();
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            eventJump?.Invoke();
+        }
+    }
+
+    public void OnSprint(InputAction.CallbackContext context)
+    {
+        if (context.performed) eventSprint?.Invoke();
+    }
+}
+
