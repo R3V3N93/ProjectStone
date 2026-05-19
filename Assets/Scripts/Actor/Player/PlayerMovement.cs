@@ -35,7 +35,17 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
         controller = GetComponent<CharacterController>();
+        
+    }
+
+    public void AttachToSO()
+    {
         pinput.eventJump += JumpEvent;
+    }
+
+    public void DetachFromSO()
+    {
+        pinput.eventJump -= JumpEvent;
     }
 
     void JumpEvent()
@@ -43,9 +53,9 @@ public class PlayerMovement : MonoBehaviour
         Jump();
     }
     
-    
     void Update()
     {
+        if (!pinput) return;
         GroundedCheck();
         Gravity();
         CameraRotation();

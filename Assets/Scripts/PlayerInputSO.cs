@@ -63,5 +63,30 @@ public class PlayerInputSO : ScriptableObject, PInput.IPlayerActions
     {
         if (context.performed) eventSprint?.Invoke();
     }
+
+    public void OnWeaponSlot1(InputAction.CallbackContext context)
+    {
+        
+    }
+
+    public void OnWeaponSlot2(InputAction.CallbackContext context)
+    {
+        
+    }
+
+    public void OnWeaponSlot3(InputAction.CallbackContext context)
+    {
+        
+    }
+
+    public void OnWeaponSlot4(InputAction.CallbackContext context)
+    {
+        
+    }
+
+    public void OnWeaponSlot5(InputAction.CallbackContext context)
+    {
+        
+    }
 }
 
