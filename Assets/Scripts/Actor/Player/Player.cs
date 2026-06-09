@@ -8,7 +8,7 @@ public class Player : Actor
     
     void Awake()
     {
-        if(!data) Debug.LogError("This Class " + this.name + " doesn't have its ScriptableObject defined. \nPossible NULL Errors!");
+        if(!data) Log.Error("Player", "I don't have its ScriptableObject defined. \nPossible NULL Errors!");
     }
     
     void SwitchWeapon(WeaponSO to)

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public PlayerInputSO pinput;
+    public PInputSO pinput;
     
     private CharacterController controller;
     
@@ -29,13 +29,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
-        if (!pinput)
-        {
-            Debug.LogError("Player doesn't have PlayerInputSO!");
-            return;
-        }
         controller = GetComponent<CharacterController>();
-        
     }
 
     public void AttachToSO()

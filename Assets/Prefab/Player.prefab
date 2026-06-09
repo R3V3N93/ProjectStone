@@ -194,9 +194,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e506c35263b07e49bab840c389c7e56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  data: {fileID: 0}
-  parentWeaponRoot: {fileID: 0}
-  parentInventory: {fileID: 0}
+  data: {fileID: 11400000, guid: 88b34bbefe0a6b443b86d3ffdba3c256, type: 2}
+  parentWeaponRoot: {fileID: 1905472724818725737}
+  parentInventory: {fileID: 8051716684469586008}
 --- !u!143 &7226597370934297887
 CharacterController:
   m_ObjectHideFlags: 0
