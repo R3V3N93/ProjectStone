@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class Level : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Level : MonoBehaviour
 
     [Header("Global Data")] 
     public GlobalSO globalSO;
+    public LoadListSO loadListSO;
     
     void Awake()
     {
@@ -32,8 +34,6 @@ public class Level : MonoBehaviour
         switch (Game.instance.gameState)
         {
             case Game.GameStateT.Level:
-                Player spawnedPlayer = SpawnPlayer(currentMap.playerStart);
-                SetPlayerPawn(spawnedPlayer);
                 break;
         }
     }
@@ -43,9 +43,17 @@ public class Level : MonoBehaviour
         Log.Debug("Game", "Loading into level  " + what.label);
         
         Game.instance.SetGameState(Game.GameStateT.Level);
-        SceneManager.LoadSceneAsync(what.scenePath);
-
+        AsyncOperation op = SceneManager.LoadSceneAsync(what.scenePath);
+        op.completed += LoadCompelete;
         currentMap = what;
+    }
+
+    private void LoadCompelete(AsyncOperation op)
+    {
+        Player spawnedPlayer = SpawnPlayer(currentMap.playerStart);
+        SetPlayerPawn(spawnedPlayer);
+        
+        
     }
     
     public void SetPlayerPawn(Player player)
