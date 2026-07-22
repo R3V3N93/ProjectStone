@@ -1,16 +1,17 @@
 using System;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Inventory
 {
     [field: SerializeField] public InventorySO data { get; private set; }
     
     [Header("Property")]
     [field: SerializeField] public uint amount { get; private set; }
 
-    void Awake()
+    public Inventory(InventorySO data)
     {
-        if(!data) Debug.LogError("This Class " + this.name + " doesn't have its ScriptableObject defined. \nPossible NULL Errors!");
+        this.data = data;
+        Log.Debug(data.label, "Craeted an instance for this item");
     }
 
     public void Give(uint amount)

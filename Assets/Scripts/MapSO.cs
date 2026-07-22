@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 
 [Serializable]
@@ -17,7 +16,7 @@ public class MapSO : ScriptableObject
     [Tooltip("Name of the map")]
     public string label;
 
-    public string scenePath;
+    public string sceneName;
     
     public PlayerStart playerStart;
 }

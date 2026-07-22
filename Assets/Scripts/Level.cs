@@ -43,7 +43,7 @@ public class Level : MonoBehaviour
         Log.Debug("Game", "Loading into level  " + what.label);
         
         Game.instance.SetGameState(Game.GameStateT.Level);
-        AsyncOperation op = SceneManager.LoadSceneAsync(what.scenePath);
+        AsyncOperation op = SceneManager.LoadSceneAsync(what.sceneName);
         op.completed += LoadCompelete;
         currentMap = what;
     }

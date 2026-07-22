@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f3d214deafdfc244b61051b9ba32062, type: 3}
   m_Name: LoadList
   m_EditorClassIdentifier: Assembly-CSharp::LoadListSO
-  inventory: []
+  inventory:
+  - {fileID: 11400000, guid: 84a62734b18289b4e8fa173bd6e433c2, type: 2}
+  - {fileID: 11400000, guid: 24cadb19bcae36a49b751f1921245569, type: 2}

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Weapon : Inventory
+public class Weapon
 {
     public virtual void Fire() {}
     public virtual void AltFire() {}
