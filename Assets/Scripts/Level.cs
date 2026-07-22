@@ -43,8 +43,12 @@ public class Level : MonoBehaviour
         Log.Debug("Game", "Loading into level  " + what.label);
         
         Game.instance.SetGameState(Game.GameStateT.Level);
-        AsyncOperation op = SceneManager.LoadSceneAsync(what.sceneName);
+        
+        if(currentMap) SceneManager.UnloadSceneAsync(currentMap.sceneName);
+        
+        AsyncOperation op = SceneManager.LoadSceneAsync(what.sceneName, LoadSceneMode.Additive);
         op.completed += LoadCompelete;
+        
         currentMap = what;
     }
 
@@ -52,8 +56,6 @@ public class Level : MonoBehaviour
     {
         Player spawnedPlayer = SpawnPlayer(currentMap.playerStart);
         SetPlayerPawn(spawnedPlayer);
-        
-        
     }
     
     public void SetPlayerPawn(Player player)

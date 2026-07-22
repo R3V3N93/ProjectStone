@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "MenuSO", menuName = "SO/MenuSO")]
+[CreateAssetMenu(fileName = "Menu", menuName = "SO/Menu")]
 public class MenuSO : ScriptableObject
 {  
     [Tooltip("Name of the menu")]

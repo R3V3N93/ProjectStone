@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15e0c025fb1cbe34fa58e14ca7e70f99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  curMenu: {fileID: 0}
 --- !u!1 &6610312944644440380
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,5 +140,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   prefabs: {fileID: 11400000, guid: 643b45818440e674e928006cbcd2627b, type: 2}
+  menus: {fileID: 11400000, guid: fb6c536d89d1e8844b30042527885301, type: 2}
   <playerPawn>k__BackingField: {fileID: 0}
   <gameState>k__BackingField: 0

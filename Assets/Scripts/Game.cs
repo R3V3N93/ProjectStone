@@ -5,8 +5,11 @@ using UnityEngine.SceneManagement;
 public class Game : MonoBehaviour
 {
     static public Game instance;
+    
+    [Header("Global Stuffs")]
     public GlobalPrefabSO prefabs;
-    [field:SerializeField] public Player playerPawn {get; private set;}
+
+    public GlobalMenuSO menus;
 
     public enum GameStateT
     {
@@ -23,12 +26,8 @@ public class Game : MonoBehaviour
 
         SetGameState(GameStateT.MainMenu);
         instance = this;
-
-        SceneManager.LoadScene("Title", LoadSceneMode.Additive);
-    }
-    
-    private void Start()
-    {
+        
+        Menu.instance.Open(0, menus.title);
     }
 
     public void SetGameState(GameStateT to)
