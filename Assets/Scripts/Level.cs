@@ -11,6 +11,7 @@ public class Level : MonoBehaviour
     [Header("Global Data")] 
     public GlobalSO globalSO;
     public LoadListSO loadListSO;
+    public MapListSO mapList;
     
     void Awake()
     {

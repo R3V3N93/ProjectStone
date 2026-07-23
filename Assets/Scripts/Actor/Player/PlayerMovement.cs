@@ -85,7 +85,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (grounded)
         {
-            Debug.Log("test");
             verticalVelocity = speedJump;
         }
     }

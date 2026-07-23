@@ -6,16 +6,9 @@ public class ActorInventory : MonoBehaviour
     [Header("Inventory")] 
     [Tooltip("Input SO to gameobject")]
     [field : SerializeField] private Dicktionary<InventorySO, Inventory> _inventory = new();
-    [field : SerializeField] private Transform rootInventory;
-    
+     
     public void Give(InventorySO what, uint amount)
     {
-        if (!rootInventory)
-        {
-            Log.Error(this.name, "I don't have inventory root defined!");
-            return;
-        }
-        
         // Adds the inventory item to inventory root
         if(!_inventory.ContainsKey(what))
         {

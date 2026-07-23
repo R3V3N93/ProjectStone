@@ -157,6 +157,7 @@ GameObject:
   - component: {fileID: 1515398953496465540}
   - component: {fileID: 7226597370934297887}
   - component: {fileID: 4735370780587422255}
+  - component: {fileID: 5528273621758572969}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -195,8 +196,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   data: {fileID: 11400000, guid: 88b34bbefe0a6b443b86d3ffdba3c256, type: 2}
-  parentWeaponRoot: {fileID: 1905472724818725737}
-  parentInventory: {fileID: 8051716684469586008}
 --- !u!143 &7226597370934297887
 CharacterController:
   m_ObjectHideFlags: 0
@@ -248,6 +247,21 @@ MonoBehaviour:
   speedMove: 25
   speedJump: 8
   speedLook: {x: 0.5, y: 0.5}
+--- !u!114 &5528273621758572969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2216957814977682750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c884dc2213e3465b934ab347b3fe89aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ActorInventory
+  _inventory:
+    SerializedKeys: []
+  rootInventory: {fileID: 0}
 --- !u!1 &3286150066411686299
 GameObject:
   m_ObjectHideFlags: 0

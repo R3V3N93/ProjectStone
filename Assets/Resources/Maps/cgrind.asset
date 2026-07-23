@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: cgrind
   m_EditorClassIdentifier: Assembly-CSharp::MapSO
   label: cybergrind
-  scenePath: Assets/Scenes/Maps/cgrind.unity
+  sceneName: cgrind
   playerStart:
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 0}

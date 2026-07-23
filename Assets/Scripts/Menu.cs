@@ -23,14 +23,14 @@ public class Menu : MonoBehaviour
 
         if (layer < 0 || layer >= layers.Length)
         {
-            Log.Error(debugFuncName, "Given layer " + layer + " is out of bound! Legal layer is [0,"+ (layers.Length - 1)+"]");
+            Log.Error(debugFuncName, "Given layer <color=yellow>" + layer + "</color> is out of bound! Legal layer is <color=yellow>[0,"+ (layers.Length - 1)+"]</color>");
             return;
         }
         
         MenuSO curMenu = layers[layer];
         if (!curMenu) return;
         
-        Log.Debug(debugFuncName, "Closed menu " + curMenu.label + " on layer " + layer);
+        Log.Debug(debugFuncName, "Closed menu <color=yellow>" + curMenu.label + "</color> on layer <color=yellow>" + layer + "</color>");
         
         SceneManager.UnloadSceneAsync(curMenu.sceneName);
         
@@ -43,7 +43,7 @@ public class Menu : MonoBehaviour
         
         if (layer < 0 || layer >= layers.Length)
         {
-            Log.Error(debugFuncName, "Given layer " + layer + " is out of bound! Legal layer is [0,"+ (layers.Length - 1)+"]");
+            Log.Error(debugFuncName, "Given layer <color=yellow>" + layer + "</color> is out of bound! Legal layer is <color=yellow>[0,"+ (layers.Length - 1)+"]</color>");
             return;
         }
         
@@ -60,6 +60,6 @@ public class Menu : MonoBehaviour
         
         layers[layer] = what;
         
-        Log.Debug(debugFuncName, "Opened menu " + what.label + " on layer " + layer);
+        Log.Debug(debugFuncName, "Opened menu <color=yellow>" + what.label + "</color> on layer <color=yellow>" + layer + "</color>");
     }
 }
