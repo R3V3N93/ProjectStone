@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[Serializable]
 public class Inventory
 {
     [field: SerializeField] public InventorySO data { get; private set; }
@@ -11,7 +12,7 @@ public class Inventory
     public Inventory(InventorySO data)
     {
         this.data = data;
-        Log.Debug(data.label, "Craeted an instance for this item");
+        Log.Debug(data.label, "Created an instance for this item");
     }
 
     public void Give(uint amount)

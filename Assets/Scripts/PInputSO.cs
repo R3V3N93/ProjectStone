@@ -11,9 +11,12 @@ public class PInputSO : ScriptableObject, PInput.IPlayerActions
     public event Action eventJump;
     public event Action eventSprint;
 
+    public int lastSlot;
+    public event Action eventWeaponSlot;
+
     private PInput pinput;
-    public Vector2 moveDirection { get; private set; }
-    public Vector2 lookDelta { get; private set; }
+    [field:SerializeField] public Vector2 moveDirection { get; private set; }
+    [field:SerializeField] public Vector2 lookDelta { get; private set; }
 
     public void OnEnable()
     {
@@ -53,10 +56,7 @@ public class PInputSO : ScriptableObject, PInput.IPlayerActions
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
-            eventJump?.Invoke();
-        }
+        if (context.performed) eventJump?.Invoke();
     }
 
     public void OnSprint(InputAction.CallbackContext context)
@@ -64,29 +64,35 @@ public class PInputSO : ScriptableObject, PInput.IPlayerActions
         if (context.performed) eventSprint?.Invoke();
     }
 
+    public void SwitchWeaponSlot(int slot)
+    {
+        lastSlot = slot;
+        eventWeaponSlot?.Invoke();
+    }
+    
     public void OnWeaponSlot1(InputAction.CallbackContext context)
     {
-        
+        SwitchWeaponSlot(0);
     }
 
     public void OnWeaponSlot2(InputAction.CallbackContext context)
     {
-        
+        SwitchWeaponSlot(1);
     }
 
     public void OnWeaponSlot3(InputAction.CallbackContext context)
     {
-        
+        SwitchWeaponSlot(2);
     }
 
     public void OnWeaponSlot4(InputAction.CallbackContext context)
     {
-        
+        SwitchWeaponSlot(3);
     }
 
     public void OnWeaponSlot5(InputAction.CallbackContext context)
     {
-        
+        SwitchWeaponSlot(4);
     }
 }
 

@@ -61,22 +61,13 @@ public class Level : MonoBehaviour
     
     public void SetPlayerPawn(Player player)
     {
-        PlayerMovement pm;
         if (playerPawn != null)
         {
-            pm = playerPawn.GetComponent<PlayerMovement>();
-            // Remove delegated methods from previous pm
-            pm.DetachFromSO();
-            // Detach pinputSO
-            pm.pinput = null;
+            playerPawn.DetachInput();
         }
         
         // Allocate new playerpawn
         playerPawn = player;
-        pm = playerPawn.GetComponent<PlayerMovement>();
-        // Attach methods to SO
-        pm.pinput = globalSO.pinput;
-        pm.AttachToSO();
-        
+        playerPawn.AttachInput();
     }
 }

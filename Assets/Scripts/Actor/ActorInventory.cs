@@ -5,31 +5,35 @@ public class ActorInventory : MonoBehaviour
 {
     [Header("Inventory")] 
     [Tooltip("Input SO to gameobject")]
-    [field : SerializeField] private Dicktionary<InventorySO, Inventory> _inventory = new();
+    [field : SerializeField] private Dicktionary<InventorySO, Inventory> inventory = new();
      
     public void Give(InventorySO what, uint amount)
     {
         // Adds the inventory item to inventory root
-        if(!_inventory.ContainsKey(what))
+        if(!inventory.ContainsKey(what))
         {
-            _inventory.Add(what, what.CreateInstance());
+            inventory.Add(what, what.CreateInstance());
         }
 
-        _inventory[what].Give(amount);
+        inventory[what].Give(amount);
+        
+        Log.Debug(this.name + "." + nameof(Give), "Gave Item <color=Yellow>" + what.label + "</color> with amount of <color=Yellow>" + amount + "</color>\nCurrent Amount : <color=Yellow>" + GetInventoryAmount(what) + "</color>");
     }
 
     public void Take(InventorySO what, uint amount)
     {
-        if (!_inventory.ContainsKey(what)) return;
+        if (!inventory.ContainsKey(what)) return;
         
-        _inventory[what].Take(amount);
+        inventory[what].Take(amount);
+        
+        Log.Debug(this.name + "." + nameof(Take), "Took Item <color=Yellow>" + what.label + "</color> with amount of <color=Yellow>" + amount + "</color>\nCurrent Amount : <color=Yellow>" + GetInventoryAmount(what) + "</color>");
     }
 
     public uint GetInventoryAmount(InventorySO what)
     {
-        if (!_inventory.ContainsKey(what)) return 0;
+        if (!inventory.ContainsKey(what)) return 0;
 
-        return _inventory[what].amount;
+        return inventory[what].amount;
     }
 
     public bool HasInventory(InventorySO what)

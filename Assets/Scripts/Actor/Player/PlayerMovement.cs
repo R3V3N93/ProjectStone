@@ -1,10 +1,12 @@
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
     public PInputSO pinput;
-    
-    private CharacterController controller;
+
+    [SerializeField] private Player player;
+    [SerializeField] private CharacterController controller;
     
     public GameObject playerCamera;
     private float playerCameraPitch = 0f;
@@ -30,14 +32,24 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         controller = GetComponent<CharacterController>();
+        player = GetComponentInParent<Player>();
+        
+        if (!player)
+        {
+            Log.Error(this.name, "Player doesn't exist for some fucking reason");
+            return;
+        }
+
+        player.attachInputSO += AttachInput;
+        player.detachInputSO += DetachInput;
     }
 
-    public void AttachToSO()
+    public void AttachInput()
     {
         pinput.eventJump += JumpEvent;
     }
 
-    public void DetachFromSO()
+    public void DetachInput()
     {
         pinput.eventJump -= JumpEvent;
     }
@@ -93,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (pinput.lookDelta.sqrMagnitude > 0)
         {
-            transform.Rotate(Vector3.up * (pinput.lookDelta.x * speedLook.x));
+            player.transform.Rotate(Vector3.up * (pinput.lookDelta.x * speedLook.x));
             playerCameraPitch -= pinput.lookDelta.y * speedLook.y;
             playerCameraPitch = Mathf.Clamp(playerCameraPitch, -80.0f, 90.0f);
             playerCamera.transform.localRotation =

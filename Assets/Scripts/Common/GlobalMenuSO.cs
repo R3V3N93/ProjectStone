@@ -4,4 +4,5 @@ using UnityEngine;
 public class GlobalMenuSO : ScriptableObject
 {
     public MenuSO title;
+    public MenuSO pause;
 }
