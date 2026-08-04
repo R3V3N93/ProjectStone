@@ -165,6 +165,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Actor
   data: {fileID: 11400000, guid: 88b34bbefe0a6b443b86d3ffdba3c256, type: 2}
+  inventory: {fileID: 2154206566431529479}
+  weapon: {fileID: 1994587218957311555}
 --- !u!114 &1515398953496465540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,6 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c884dc2213e3465b934ab347b3fe89aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ActorInventory
+  actor: {fileID: 0}
   inventory:
     SerializedKeys: []
     SerializedValues: []

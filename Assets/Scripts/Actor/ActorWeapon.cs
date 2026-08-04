@@ -44,6 +44,11 @@ public class WeaponSlot
         weapons.Remove(what);
         return true;
     }
+
+    public bool Find(WeaponSO what)
+    {
+        return weapons.Contains(what);
+    }
 }
 
 [RequireComponent(typeof(ActorInventory))]
@@ -57,6 +62,7 @@ public class ActorWeapon : MonoBehaviour
     public void Awake()
     {
         inventory = GetComponent<ActorInventory>();
+        inventory.actor.weapon = this;
     }
     
     public void Unequip()
@@ -108,7 +114,7 @@ public class ActorWeapon : MonoBehaviour
             Log.Warning(debugFuncName, "Failed to add weapon <color=Yellow>" + what.label + "</color> to <color=Yellow>Slot " + to + "</color>");
     }
 
-    public void RemoveFromSlot(int from, WeaponSO what)
+    public void RemoveFromSlot(WeaponSO what)
     {
         string debugFuncName = this.name + "." + nameof(RemoveFromSlot);
         
@@ -117,14 +123,23 @@ public class ActorWeapon : MonoBehaviour
             Log.Warning(debugFuncName, "Given weapon is null!");
             return;
         }
-        
-        if(!inventory.HasInventory(what))
+
+        WeaponSlot from = null;
+        foreach (WeaponSlot slot in slots)
         {
-            Log.Warning(debugFuncName, "Given weapon <color=Yellow>"+what.label+"</color> is not present in inventory!");
+            if (slot.Find(what))
+            {
+                from = slot;
+                break;
+            }
+        }
+
+        if (from == null)
+        {
             return;
         }
         
-        if(slots[from].Remove(what))
+        if(from.Remove(what))
             Log.Debug(debugFuncName, "Removed weapon <color=Yellow>" + what.label + "</color> from <color=Yellow>Slot " + from + "</color>");
         else
             Log.Warning(debugFuncName, "Failed to remove weapon <color=Yellow>" + what.label + "</color> from <color=Yellow>Slot " + from + "</color>");

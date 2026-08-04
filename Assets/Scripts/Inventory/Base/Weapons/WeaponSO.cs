@@ -8,9 +8,10 @@ public class WeaponSO : InventorySO
     public ViewModelWeapon viewModelPrefab; 
     public InventorySO ammoType;
     
-    public override Inventory CreateInstance()
+    public override Inventory CreateInstance(Actor owner)
     {
         Weapon temp = new Weapon(this);
+        temp.owner = owner;
         return temp;
     }
 }

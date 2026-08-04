@@ -7,9 +7,14 @@ public class InventorySO : ScriptableObject
     [Header("Property")]
     public uint maxamount;
 
-    public virtual Inventory CreateInstance()
+    public virtual Inventory CreateInstance(Actor owner)
     {
+        if (!owner)
+        {
+            Log.Error(this.name + "." + nameof(CreateInstance), "owner must NOT be null!");
+        }
         Inventory temp = new Inventory(this);
+        temp.owner = owner;
         return temp;
     }
 }

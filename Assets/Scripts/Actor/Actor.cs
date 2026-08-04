@@ -6,6 +6,9 @@ public class Actor : MonoBehaviour
 {
     public ActorSO data;
     
+    public ActorInventory inventory;
+    public ActorWeapon weapon;
+    
     void Awake()
     {
         if(!data) Log.Error(this.name, "I don't have its ScriptableObject defined. \nPossible NULL Errors!");

@@ -3,16 +3,23 @@ using System;
 
 public class ActorInventory : MonoBehaviour
 {
+    [field: SerializeField] public Actor actor;
+    
     [Header("Inventory")] 
     [Tooltip("Input SO to gameobject")]
     [field : SerializeField] private Dicktionary<InventorySO, Inventory> inventory = new();
-     
+    
+    void Awake()
+    {
+        actor = GetComponentInParent<Actor>();
+    }
+
     public void Give(InventorySO what, uint amount)
     {
         // Adds the inventory item to inventory root
         if(!inventory.ContainsKey(what))
         {
-            inventory.Add(what, what.CreateInstance());
+            inventory.Add(what, what.CreateInstance(actor));
         }
 
         inventory[what].Give(amount);
@@ -27,19 +34,6 @@ public class ActorInventory : MonoBehaviour
         inventory[what].Take(amount);
         
         Log.Debug(this.name + "." + nameof(Take), "Took Item <color=Yellow>" + what.label + "</color> with amount of <color=Yellow>" + amount + "</color>\nCurrent Amount : <color=Yellow>" + GetInventoryAmount(what) + "</color>");
-
-        if (what is WeaponSO && GetInventoryAmount(what) == 0)
-        {
-            
-        }
-        
-        /*
-        // If having none, remove from dictionary
-        if (inventory[what].amount == 0)
-        {
-            inventory[what].Dispose
-            inventory.Remove(what);
-        }*/
     }
 
     public uint GetInventoryAmount(InventorySO what)

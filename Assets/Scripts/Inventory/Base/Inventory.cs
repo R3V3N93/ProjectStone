@@ -4,7 +4,8 @@ using UnityEngine;
 [Serializable]
 public class Inventory
 {
-    [field: SerializeField] public InventorySO data { get; private set; }
+    [field: SerializeField] public InventorySO data { get; protected set; }
+    [field: SerializeField] public Actor owner;
     
     [Header("Property")]
     [field: SerializeField] public uint amount { get; private set; }
@@ -17,12 +18,12 @@ public class Inventory
     }
 
     
-    public void Give(uint amount)
+    public virtual void Give(uint amount)
     {
         this.amount = Math.Clamp(this.amount + amount, 0, data.maxamount);
     }
     
-    public void Take(uint amount)
+    public virtual void Take(uint amount)
     {
         this.amount = Math.Clamp(this.amount - amount, 0, data.maxamount);
     }
