@@ -21,15 +21,28 @@ public class WeaponSlot
             startIndex = weapons.LastIndexOf(from);
         }
         
-        if(startIndex + 1 >= weapons.Count) return null;
+        if(startIndex + 1 >= weapons.Count) startIndex = -1;
         
         // I hope it's safe.
         return weapons[startIndex + 1];
     }
 
-    public void Add(WeaponSO what)
+    public bool Add(WeaponSO what)
     {
+        if (!what) return false;
+        if(weapons.Contains(what)) return false;
+        
         weapons.Add(what);
+        return true;
+    }
+
+    public bool Remove(WeaponSO what)
+    {
+        if (!what) return false;
+        if(!weapons.Contains(what)) return false;
+        
+        weapons.Remove(what);
+        return true;
     }
 }
 
@@ -51,7 +64,6 @@ public class ActorWeapon : MonoBehaviour
         if (!curWeapon) return;
         
         curWeapon = null;
-        return SceneManager.UnloadSceneAsync(curWeapon.firstPersonScene);
     }
     
     public void Equip(WeaponSO what, bool ignoreCheckPossession = false)
@@ -64,7 +76,7 @@ public class ActorWeapon : MonoBehaviour
             
         Unequip();
         curWeapon = what;
-        SceneManager.LoadSceneAsync(curWeapon.firstPersonScene, LoadSceneMode.Additive);
+        
     }
     
     // TODO : Find a way to unify these error messages! Mayhaps through error code method. Copy pasting them every time is retarded
@@ -90,23 +102,48 @@ public class ActorWeapon : MonoBehaviour
             return;
         }
         
-        slots[to].Add(what);
-        
+        if(slots[to].Add(what))
+            Log.Debug(debugFuncName, "Added weapon <color=Yellow>" + what.label + "</color> to <color=Yellow>Slot " + to + "</color>");
+        else
+            Log.Warning(debugFuncName, "Failed to add weapon <color=Yellow>" + what.label + "</color> to <color=Yellow>Slot " + to + "</color>");
     }
 
-    public void SwitchToSlot(int to)
+    public void RemoveFromSlot(int from, WeaponSO what)
+    {
+        string debugFuncName = this.name + "." + nameof(RemoveFromSlot);
+        
+        if(!what)
+        {
+            Log.Warning(debugFuncName, "Given weapon is null!");
+            return;
+        }
+        
+        if(!inventory.HasInventory(what))
+        {
+            Log.Warning(debugFuncName, "Given weapon <color=Yellow>"+what.label+"</color> is not present in inventory!");
+            return;
+        }
+        
+        if(slots[from].Remove(what))
+            Log.Debug(debugFuncName, "Removed weapon <color=Yellow>" + what.label + "</color> from <color=Yellow>Slot " + from + "</color>");
+        else
+            Log.Warning(debugFuncName, "Failed to remove weapon <color=Yellow>" + what.label + "</color> from <color=Yellow>Slot " + from + "</color>");
+    }
+    
+    public bool SwitchToSlot(int to)
     {
         if(to < 0 || to >= slots.Length)
         {
             Log.Warning(this.name + "." + nameof(SwitchToSlot), "Slot is out of range. it must be within <color=Yellow>[" + 0+ "," +
                                                                 (slots.Length - 1)+ "</color>");
-            return;
+            return false;
         }
 
         WeaponSO toWeapon = slots[to].GetNextWeapon(curWeapon);
 
-        if (!toWeapon) return;
+        if (!toWeapon) return false;
         
         Equip(toWeapon);
+        return true;
     }
 }

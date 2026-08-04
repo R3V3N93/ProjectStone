@@ -1,8 +1,8 @@
-using UnityEngine;
-
-public class Weapon
+public class Weapon : Inventory
 {
-    public virtual void Fire() {}
-    public virtual void AltFire() {}
-    public virtual void Reload() {}
+    public Weapon(WeaponSO what) : base(what) {}
+    public int curSlot = -1;
+    
+    public void Fire() {}
+    public void AltFire() {}
 }

@@ -7,7 +7,7 @@ public class InventorySO : ScriptableObject
     [Header("Property")]
     public uint maxamount;
 
-    public Inventory CreateInstance()
+    public virtual Inventory CreateInstance()
     {
         Inventory temp = new Inventory(this);
         return temp;

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponSO
   label: KS-23
   maxamount: 1
-  firstPersonScene: Shotgun
+  viewModelPrefab: {fileID: -4756224766409630327, guid: 4c14b201b3d56bc4db29f0c0d5c3c3b1, type: 3}
   ammoType: {fileID: 0}

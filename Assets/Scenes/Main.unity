@@ -232,6 +232,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1324704595609070974, guid: ac886916b93ec264eb52dd2810578448, type: 3}
+      propertyPath: near clip plane
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 3986863234853268905, guid: ac886916b93ec264eb52dd2810578448, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponSO
   label: PTRS-41
   maxamount: 1
-  firstPersonScene: Sniper
+  viewModelPrefab: {fileID: -278523756128266321, guid: fff4c042b7d6cba47bdee49e9b0a828b, type: 3}
   ammoType: {fileID: 0}

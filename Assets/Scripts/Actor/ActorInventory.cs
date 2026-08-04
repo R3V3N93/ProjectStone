@@ -27,6 +27,19 @@ public class ActorInventory : MonoBehaviour
         inventory[what].Take(amount);
         
         Log.Debug(this.name + "." + nameof(Take), "Took Item <color=Yellow>" + what.label + "</color> with amount of <color=Yellow>" + amount + "</color>\nCurrent Amount : <color=Yellow>" + GetInventoryAmount(what) + "</color>");
+
+        if (what is WeaponSO && GetInventoryAmount(what) == 0)
+        {
+            
+        }
+        
+        /*
+        // If having none, remove from dictionary
+        if (inventory[what].amount == 0)
+        {
+            inventory[what].Dispose
+            inventory.Remove(what);
+        }*/
     }
 
     public uint GetInventoryAmount(InventorySO what)
@@ -39,28 +52,5 @@ public class ActorInventory : MonoBehaviour
     public bool HasInventory(InventorySO what)
     {
         return GetInventoryAmount(what) > 0;
-    }
-    
-    ////////////////////////////////////
-    // Weapon
-    ////////////////////////////////////
-
-    [Header("Weapon")] 
-    public WeaponSO currentWeapon { get; private set; }
-    // This is for defining switch behaviours for each actor
-    // For example, player would need to move the inventory to weapon root
-    // Monsters will probably do the same but it will play unique animations
-    private Action switchWeaponCompleted;
-    public void SwitchWeapon(WeaponSO to)
-    {
-        if(!HasInventory(to))
-        {
-            Log.Warning(name, "Could not switch to " + to.name + ". This Actor does not have one!");
-            return;
-        }
-
-        currentWeapon = to;
-        
-        switchWeaponCompleted?.Invoke();
     }
 }

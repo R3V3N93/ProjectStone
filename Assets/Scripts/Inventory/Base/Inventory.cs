@@ -9,12 +9,14 @@ public class Inventory
     [Header("Property")]
     [field: SerializeField] public uint amount { get; private set; }
 
+    public Inventory() {}
     public Inventory(InventorySO data)
     {
         this.data = data;
         Log.Debug(data.label, "Created an instance for this item");
     }
 
+    
     public void Give(uint amount)
     {
         this.amount = Math.Clamp(this.amount + amount, 0, data.maxamount);
