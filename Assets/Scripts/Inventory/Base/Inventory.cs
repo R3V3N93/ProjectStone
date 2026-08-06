@@ -1,8 +1,9 @@
 using System;
 using UnityEngine;
+using Object = System.Object;
 
 [Serializable]
-public class Inventory
+public class Inventory : Object
 {
     [field: SerializeField] public InventorySO data { get; protected set; }
     [field: SerializeField] public Actor owner;
@@ -16,7 +17,6 @@ public class Inventory
         this.data = data;
         Log.Debug(data.label, "Created an instance for this item");
     }
-
     
     public virtual void Give(uint amount)
     {

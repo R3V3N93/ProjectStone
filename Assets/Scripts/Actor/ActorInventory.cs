@@ -16,7 +16,7 @@ public class ActorInventory : MonoBehaviour
 
     public void Give(InventorySO what, uint amount)
     {
-        // Adds the inventory item to inventory root
+        // Adds the inventory item to inventory
         if(!inventory.ContainsKey(what))
         {
             inventory.Add(what, what.CreateInstance(actor));

@@ -11,7 +11,7 @@ public class WeaponSO : InventorySO
     public override Inventory CreateInstance(Actor owner)
     {
         Weapon temp = new Weapon(this);
-        temp.owner = owner;
+        temp.owner = owner; 
         return temp;
     }
 }

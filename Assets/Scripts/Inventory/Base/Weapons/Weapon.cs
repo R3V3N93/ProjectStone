@@ -4,6 +4,9 @@ public class Weapon : Inventory
 {
     public Weapon(WeaponSO what) : base(what) {}
     
+    [SerializeField] private ViewModelWeapon viewModel;
+    //[SerializeField] private ViewModelWeapon worldModel;
+    
     public override void Take(uint amount)
     {
         base.Take(amount);
