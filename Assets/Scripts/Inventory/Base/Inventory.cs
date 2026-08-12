@@ -1,9 +1,8 @@
 using System;
 using UnityEngine;
-using Object = System.Object;
 
 [Serializable]
-public class Inventory : Object
+public class Inventory
 {
     [field: SerializeField] public InventorySO data { get; protected set; }
     [field: SerializeField] public Actor owner;

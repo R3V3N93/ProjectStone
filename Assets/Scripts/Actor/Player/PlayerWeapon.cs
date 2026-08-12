@@ -42,6 +42,7 @@ public class PlayerWeapon : MonoBehaviour
     {
         if (actorWeapon.SwitchToSlot(pinput.lastSlot))
         {
+            /*
             ViewModelWeapon weap = ViewModel.instance.GetElement() as ViewModelWeapon;
             
             if(weap) pinput.eventAttack -= weap.Fire;
@@ -50,7 +51,7 @@ public class PlayerWeapon : MonoBehaviour
             ViewModel.instance.Load(actorWeapon.curWeapon.viewModelPrefab);
             
             weap = ViewModel.instance.GetElement() as ViewModelWeapon;
-            pinput.eventAttack += weap.Fire;
+            pinput.eventAttack += weap.Fire;*/
         }
         
     }
