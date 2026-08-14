@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(WeaponObject))]
-public class Shotgun : MonoBehaviour, IViewModelWeapon, IGun
+public class Shotgun : MonoBehaviour, IVWeapon, IGun
 {
     [SerializeField] WeaponObject weapon;
     void Awake()
@@ -10,12 +10,12 @@ public class Shotgun : MonoBehaviour, IViewModelWeapon, IGun
         weapon = GetComponent<WeaponObject>();
     }
 
-    void V_Fire()
+    public void V_Fire()
     {
-        weapon.vAnim.SetTrigger("Fire");
+        weapon.v.animator.SetTrigger("Fire");
     }
 
-    void V_AltFire()
+    public void V_AltFire()
     {
 
     }

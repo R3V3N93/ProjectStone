@@ -54,6 +54,7 @@ public class WeaponSlot
 [RequireComponent(typeof(ActorInventory))]
 public class ActorWeapon : MonoBehaviour
 {
+    [field: SerializeField] public Transform root;
     private ActorInventory inventory;
     
     [field: SerializeField] public WeaponSlot[] slots = new WeaponSlot[10];
@@ -69,6 +70,8 @@ public class ActorWeapon : MonoBehaviour
     {
         if (!curWeapon) return;
         
+        
+        GetCurrentWeapon().DestroyObject();
         curWeapon = null;
     }
     
@@ -81,7 +84,9 @@ public class ActorWeapon : MonoBehaviour
         }
             
         Unequip();
+        
         curWeapon = what;
+        GetCurrentWeapon().CreateObject();
         
     }
     
@@ -160,5 +165,11 @@ public class ActorWeapon : MonoBehaviour
         
         Equip(toWeapon);
         return true;
+    }
+
+    public Weapon GetCurrentWeapon()
+    {
+        if (!curWeapon) return null;
+        return inventory.GetInventory(curWeapon) as Weapon;
     }
 }

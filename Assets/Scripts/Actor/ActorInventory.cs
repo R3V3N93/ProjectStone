@@ -17,7 +17,7 @@ public class ActorInventory : MonoBehaviour
     public void Give(InventorySO what, uint amount)
     {
         // Adds the inventory item to inventory
-        if(!inventory.ContainsKey(what))
+        if(!HasInventory(what))
         {
             inventory.Add(what, what.CreateInstance(actor));
         }
@@ -29,7 +29,7 @@ public class ActorInventory : MonoBehaviour
 
     public void Take(InventorySO what, uint amount)
     {
-        if (!inventory.ContainsKey(what)) return;
+        if (!HasInventory(what)) return;
         
         inventory[what].Take(amount);
         
@@ -46,5 +46,11 @@ public class ActorInventory : MonoBehaviour
     public bool HasInventory(InventorySO what)
     {
         return GetInventoryAmount(what) > 0;
+    }
+
+    public Inventory GetInventory(InventorySO what)
+    {
+        if (!what || !HasInventory(what)) return null;
+        return inventory[what];
     }
 }

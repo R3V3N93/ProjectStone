@@ -72,27 +72,27 @@ public class PInputSO : ScriptableObject, PInput.IPlayerActions
     
     public void OnWeaponSlot1(InputAction.CallbackContext context)
     {
-        SwitchWeaponSlot(0);
+        if (context.performed) SwitchWeaponSlot(0);
     }
 
     public void OnWeaponSlot2(InputAction.CallbackContext context)
     {
-        SwitchWeaponSlot(1);
+        if (context.performed) SwitchWeaponSlot(1);
     }
 
     public void OnWeaponSlot3(InputAction.CallbackContext context)
     {
-        SwitchWeaponSlot(2);
+        if (context.performed) SwitchWeaponSlot(2);
     }
 
     public void OnWeaponSlot4(InputAction.CallbackContext context)
     {
-        SwitchWeaponSlot(3);
+        if (context.performed) SwitchWeaponSlot(3);
     }
 
     public void OnWeaponSlot5(InputAction.CallbackContext context)
     {
-        SwitchWeaponSlot(4);
+        if (context.performed) SwitchWeaponSlot(4);
     }
 }
 

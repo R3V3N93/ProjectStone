@@ -167,6 +167,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 88b34bbefe0a6b443b86d3ffdba3c256, type: 2}
   inventory: {fileID: 2154206566431529479}
   weapon: {fileID: 1994587218957311555}
+  cam: {fileID: 391021934393527726}
 --- !u!114 &1515398953496465540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,7 +262,7 @@ Transform:
   m_GameObject: {fileID: 8051716684469586008}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.59, y: 1.19, z: -0.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -295,6 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95e6c02fbace462b849e26d8f26b443b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ActorWeapon
+  root: {fileID: 810289712615822315}
   slots:
   - weapons: []
   - weapons: []
@@ -332,6 +334,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4025590862397502801}
   - component: {fileID: 8268544590491551227}
+  - component: {fileID: 391021934393527726}
   m_Layer: 0
   m_Name: CameraRoot
   m_TagString: Untagged
@@ -397,3 +400,17 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
+--- !u!114 &391021934393527726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8976590087131579631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec6fe89af67747a1abfba41fa853a302, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ActorCamera
+  actor: {fileID: 928178266096842358}
+  cam: {fileID: 8268544590491551227}

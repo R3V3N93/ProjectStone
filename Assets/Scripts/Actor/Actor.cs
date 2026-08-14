@@ -8,6 +8,7 @@ public class Actor : MonoBehaviour
     
     public ActorInventory inventory;
     public ActorWeapon weapon;
+    public ActorCamera cam;
     
     void Awake()
     {

@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 public class WeaponSO : InventorySO
 {
     [Header("Weapon")]
-    public ViewModelWeapon viewModelPrefab; 
+    public WeaponObject prefab; 
     public InventorySO ammoType;
     
     public override Inventory CreateInstance(Actor owner)
