@@ -2,6 +2,51 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public class InputEvent
+{
+    public event Action on;
+    public event Action off;
+    public bool isHeld;
+
+    protected void InvokeOn() => on?.Invoke();
+    protected void InvokeOff() => off?.Invoke();
+
+    public virtual void Update(InputAction.CallbackContext context)
+    {
+        if(context.canceled)
+        {
+            InvokeOff();
+            isHeld = false;
+        }
+    }
+}
+
+public class InputButton : InputEvent
+{
+    public override void Update(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            InvokeOn();
+            isHeld = true;
+        }
+        base.Update(context);
+    }
+}
+
+public class InputValue<T> : InputEvent
+{
+    public T value;
+    public override void Update(InputAction.CallbackContext context)
+    {
+        if(context.started)
+        {
+            InvokeOn();
+            isHeld = true;
+        }
+        base.Update(context);
+    }
+}
 
 [CreateAssetMenu(fileName = "PlayerInputSO", menuName = "SO/PlayerInput")]
 public class PInputSO : ScriptableObject, PInput.IPlayerActions
