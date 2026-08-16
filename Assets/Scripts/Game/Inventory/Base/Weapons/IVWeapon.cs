@@ -7,13 +7,13 @@ public interface IVWeapon
     {
         if(!so) return;
 
-        so.eventAttack += V_Fire;
+        so.attack.on += V_Fire;
     }
 
     public virtual void DeattachFromPlayerInput(PInputSO so)
     {
         if(!so) return;
 
-        so.eventAttack -= V_Fire;
+        so.attack.on -= V_Fire;
     }
 }   

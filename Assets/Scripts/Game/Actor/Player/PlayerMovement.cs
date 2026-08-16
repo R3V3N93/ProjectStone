@@ -46,12 +46,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void AttachInput()
     {
-        pinput.eventJump += JumpEvent;
+        pinput.jump.on += JumpEvent;
     }
 
     public void DetachInput()
     {
-        pinput.eventJump -= JumpEvent;
+        pinput.jump.on -= JumpEvent;
     }
 
     void JumpEvent()

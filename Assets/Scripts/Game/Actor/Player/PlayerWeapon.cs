@@ -30,12 +30,12 @@ public class PlayerWeapon : MonoBehaviour
 
     void AttachInput()
     {
-        pinput.eventWeaponSlot += SwitchWeapon;
+        pinput.weaponSlot.on += SwitchWeapon;
     }
 
     void DetachInput()
     {
-        pinput.eventWeaponSlot -= SwitchWeapon;
+        pinput.weaponSlot.on -= SwitchWeapon;
     }
 
     void SwitchWeapon()
@@ -46,7 +46,7 @@ public class PlayerWeapon : MonoBehaviour
             if (i != null)
             {
                 Debug.Log("test");
-                pinput.eventAttack += i.V_Fire;
+                i.AttachToPlayerInput(pinput);
             }
             
         }

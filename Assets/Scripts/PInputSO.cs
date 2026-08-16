@@ -51,13 +51,13 @@ public class InputValue<T> : InputEvent
 [CreateAssetMenu(fileName = "PlayerInputSO", menuName = "SO/PlayerInput")]
 public class PInputSO : ScriptableObject, PInput.IPlayerActions
 {
-    public event Action eventAttack;
-    public event Action eventCrouch;
-    public event Action eventJump;
-    public event Action eventSprint;
+    public InputButton attack = new InputButton();
+    public InputButton crouch = new InputButton();
+    public InputButton jump = new InputButton();
+    public InputButton sprint = new InputButton();
+    public InputButton weaponSlot = new InputButton();
 
     public int lastSlot;
-    public event Action eventWeaponSlot;
 
     private PInput pinput;
     [field:SerializeField] public Vector2 moveDirection { get; private set; }
@@ -91,53 +91,53 @@ public class PInputSO : ScriptableObject, PInput.IPlayerActions
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (context.performed) eventAttack?.Invoke();
+        attack.Update(context);
     }
 
     public void OnCrouch(InputAction.CallbackContext context)
     {
-        if (context.performed) eventCrouch?.Invoke();
+        crouch.Update(context);
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.performed) eventJump?.Invoke();
+        jump.Update(context);
     }
 
     public void OnSprint(InputAction.CallbackContext context)
     {
-        if (context.performed) eventSprint?.Invoke();
+        sprint.Update(context);
     }
 
-    public void SwitchWeaponSlot(int slot)
+    public void SwitchWeaponSlot(int slot, InputAction.CallbackContext context)
     {
         lastSlot = slot;
-        eventWeaponSlot?.Invoke();
+        weaponSlot.Update(context);
     }
     
     public void OnWeaponSlot1(InputAction.CallbackContext context)
     {
-        if (context.performed) SwitchWeaponSlot(0);
+        if (context.performed) SwitchWeaponSlot(0, context);
     }
 
     public void OnWeaponSlot2(InputAction.CallbackContext context)
     {
-        if (context.performed) SwitchWeaponSlot(1);
+        if (context.performed) SwitchWeaponSlot(1, context);
     }
 
     public void OnWeaponSlot3(InputAction.CallbackContext context)
     {
-        if (context.performed) SwitchWeaponSlot(2);
+        if (context.performed) SwitchWeaponSlot(2, context);
     }
 
     public void OnWeaponSlot4(InputAction.CallbackContext context)
     {
-        if (context.performed) SwitchWeaponSlot(3);
+        if (context.performed) SwitchWeaponSlot(3, context);
     }
 
     public void OnWeaponSlot5(InputAction.CallbackContext context)
     {
-        if (context.performed) SwitchWeaponSlot(4);
+        if (context.performed) SwitchWeaponSlot(4, context);
     }
 }
 
