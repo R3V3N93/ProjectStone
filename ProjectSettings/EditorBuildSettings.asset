@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Main.unity
     guid: 00fad3bf5f42b1c47815f8b02d0b96c2
   - enabled: 1
-    path: Assets/Scenes/Maps/cgrind.unity
+    path: Assets/Game/Maps/cgrind/cgrind.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
     path: Assets/Scenes/Menu/Title.unity
