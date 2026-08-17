@@ -45,7 +45,6 @@ public class PlayerWeapon : MonoBehaviour
             IVWeapon i = actorWeapon.GetCurrentWeapon().objectInstance.GetComponent<IVWeapon>();
             if (i != null)
             {
-                Debug.Log("test");
                 i.AttachToPlayerInput(pinput);
             }
             
