@@ -13,13 +13,7 @@ EditorBuildSettings:
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
     path: Assets/Scenes/Menu/Title.unity
-    guid: 3f3d4ba494b7c954ba3947d6839086c1
-  - enabled: 1
-    path: Assets/Scenes/ViewModel.unity
-    guid: fd196bda45c9e20448253450bb5d92ba
-  - enabled: 1
-    path: Assets/Scenes/FirstPerson/Weapons/Sniper.unity
-    guid: b533b9dd06831424bbda5197e9fb806d
+    guid: 20c5e999f6c7408ea9e60877366f1f94
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
