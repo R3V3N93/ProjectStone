@@ -1,4 +1,6 @@
 public interface IGun
 {
-    void Fire() {}
+    public void Fire() {}
+
+    protected void FireBullet(){}
 }

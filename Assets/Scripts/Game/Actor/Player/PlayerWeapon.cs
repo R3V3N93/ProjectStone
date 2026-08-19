@@ -42,7 +42,7 @@ public class PlayerWeapon : MonoBehaviour
     {
         if (actorWeapon.SwitchToSlot(pinput.lastSlot))
         {
-            IVWeapon i = actorWeapon.GetCurrentWeapon().objectInstance.GetComponent<IVWeapon>();
+            IPlayerWeapon i = actorWeapon.GetCurrentWeapon().objectInstance.GetComponent<IPlayerWeapon>();
             if (i != null)
             {
                 i.AttachToPlayerInput(pinput);
