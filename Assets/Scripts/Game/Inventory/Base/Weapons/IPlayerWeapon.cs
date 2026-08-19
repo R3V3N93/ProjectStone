@@ -1,4 +1,6 @@
-public interface IVWeapon
+// IPlayer
+
+public interface IPlayerWeapon
 {
     public void V_Fire() {}
     public void V_AltFire() {}

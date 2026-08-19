@@ -6,6 +6,7 @@ public struct WeaponModel
 {
     public Transform transform;
     public Animator animator;
+
     public void Update(Transform target)
     {
         this.transform.position = target.transform.position;
@@ -15,12 +16,14 @@ public struct WeaponModel
 
 public class WeaponObject : MonoBehaviour
 {
-    [field:SerializeField] private Weapon inventoryDefinition;
+    private Weapon inventoryDefinition;
+
     private bool initiated;
+
     [field:SerializeField] public WeaponModel v {get; private set;}
     [field:SerializeField] public WeaponModel w {get; private set;}
     
-    public void Init(Weapon definition)
+    public void Init(Weapon definition) // Sweet Sweet dependency injection
     {
         inventoryDefinition = definition;
         inventoryDefinition.isObjectAlive = true;
