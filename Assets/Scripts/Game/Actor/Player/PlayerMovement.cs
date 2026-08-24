@@ -1,145 +1,64 @@
 using UnityEngine;
+using QuakeLR;
 
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(Player))]
+[RequireComponent(typeof(QuakeCharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
     public PInputSO pinput;
 
-    [SerializeField] private Player player;
-    [SerializeField] private CharacterController controller;
+    private Player player;
+    private QuakeCharacterController controller;
     
-    public GameObject playerCamera;
+    public Transform playerCamera;
     private float playerCameraPitch = 0f;
-
-    [Header("Properties")] 
-    [Header("Body")]
-    [SerializeField] private bool grounded;
-    [Tooltip("Used for rough grounds to give visual perfection(e.g. cobbles etc)")]
-    public float groundedOffset;
-
-    public LayerMask groundLayer;
-    [Header("Movement")] 
-    public float gravity = -9.81f;
-    public float terminalVelocity = 53f;
-    public float verticalVelocity;
-    
-    public float speedChangeRate = 1f;
-    public float speedMove = 1f;
-    public float speedJump = 2f;
-    public Vector2 speedLook = new Vector2(0.5f, 0.5f);
-    
+    public Vector2 lookSpeed = new Vector2(0.5f, 0.5f);
 
     void Awake()
     {
-        controller = GetComponent<CharacterController>();
+        controller = GetComponent<QuakeCharacterController>();
         player = GetComponentInParent<Player>();
-        
-        if (!player)
-        {
-            Log.Error(this.name, "Player doesn't exist for some fucking reason");
-            return;
-        }
 
-        player.attachInputSO += AttachInput;
-        player.detachInputSO += DetachInput;
+        player.attachInputSO += SubscribeInput;
+        player.detachInputSO += UnsubscribeInput;
     }
 
-    public void AttachInput()
+    public void SubscribeInput()
     {
-        pinput.jump.on += JumpEvent;
+        pinput.jump.on += controller.TryJump;
     }
 
-    public void DetachInput()
+    public void UnsubscribeInput()
     {
-        pinput.jump.on -= JumpEvent;
+        pinput.jump.on -= controller.TryJump;
     }
 
-    void JumpEvent()
-    {
-        Jump();
-    }
-    
+    void OnEnable() => SubscribeInput();
+    void OnDisable() => UnsubscribeInput();
+
     void Update()
     {
-        if (!pinput) return;
-        GroundedCheck();
-        Gravity();
-        CameraRotation();
-        Movement();
-    }
-    
-    private void GroundedCheck()
-    {
-        Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - groundedOffset, transform.position.z);
-        grounded = Physics.CheckSphere(spherePosition, controller.radius, groundLayer, QueryTriggerInteraction.Ignore);
-    }
-    
-    void Gravity()
-    {
-        if (grounded)
-        {
-            if (verticalVelocity < 0f)
-            {
-                verticalVelocity = 0f;
-            }
-        }
-        else
-        {
-            if (Mathf.Abs(verticalVelocity) < terminalVelocity)
-            {
-                verticalVelocity += gravity * Time.deltaTime;
-            }
-        }
-        
+        controller.ControllerThink(Time.deltaTime);
+        Move();
+        Look();
     }
 
-    void Jump()
+    void Look()
     {
-        if (grounded)
-        {
-            verticalVelocity = speedJump;
-        }
+        // X
+        player.transform.Rotate(Vector3.up * (pinput.lookDelta.value.x * lookSpeed.x));
+
+        // Y
+        playerCameraPitch -= pinput.lookDelta.value.y * lookSpeed.y;
+        playerCameraPitch = Mathf.Clamp(playerCameraPitch, -80.0f, 90.0f);
+
+        playerCamera.localRotation =
+            Quaternion.Euler(playerCameraPitch, 0f, 0f);
     }
 
-    void CameraRotation()
+    void Move()
     {
-        if (pinput.lookDelta.sqrMagnitude > 0)
-        {
-            player.transform.Rotate(Vector3.up * (pinput.lookDelta.x * speedLook.x));
-            playerCameraPitch -= pinput.lookDelta.y * speedLook.y;
-            playerCameraPitch = Mathf.Clamp(playerCameraPitch, -80.0f, 90.0f);
-            playerCamera.transform.localRotation =
-                Quaternion.Euler(playerCameraPitch, 0f, 0f);
-        }
-    }
-
-    void Movement()
-    {
-        Vector3 inputDirection = new Vector3(pinput.moveDirection.x, 0.0f, pinput.moveDirection.y).normalized;
-
-        float calculatedSpeed = 0f;
-        float targetSpeed = speedMove;
-        if (pinput.moveDirection == Vector2.zero) targetSpeed = 0.0f;
-        
-        float currentHorizontalSpeed = new Vector3(controller.velocity.x, 0.0f, controller.velocity.z).magnitude;
-
-        float speedOffset = 0.1f;
-        
-        if (currentHorizontalSpeed < targetSpeed - speedOffset || currentHorizontalSpeed > targetSpeed + speedOffset)
-        {
-            calculatedSpeed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed, Time.deltaTime * speedChangeRate);
-            calculatedSpeed = Mathf.Round(calculatedSpeed * 1000f) / 1000f;
-        }
-        else
-        {
-            calculatedSpeed = targetSpeed;
-        }
-        
-        if (pinput.moveDirection != Vector2.zero)
-        {
-            inputDirection = transform.right * pinput.moveDirection.x + transform.forward * pinput.moveDirection.y;
-        }
-        
-        controller.Move(inputDirection * (Time.deltaTime * calculatedSpeed) + new Vector3(0.0f, verticalVelocity, 0.0f) * Time.deltaTime);
+        Vector3 moveDirection = (playerCamera.forward * pinput.moveDir.value.y + playerCamera.right * pinput.moveDir.value.x);
+        controller.Move(moveDirection);
     }
 }

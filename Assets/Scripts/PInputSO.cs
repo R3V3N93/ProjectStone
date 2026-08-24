@@ -34,8 +34,9 @@ public class InputButton : InputEvent
     }
 }
 
-public class InputValue<T> : InputEvent
+public class InputValue<T> : InputEvent where T : struct
 {
+    public Action<T> action;
     public T value;
     public override void Update(InputAction.CallbackContext context)
     {
@@ -44,6 +45,8 @@ public class InputValue<T> : InputEvent
             InvokeOn();
             isHeld = true;
         }
+        action?.Invoke(context.ReadValue<T>());
+        value = context.ReadValue<T>();
         base.Update(context);
     }
 }
@@ -52,16 +55,20 @@ public class InputValue<T> : InputEvent
 public class PInputSO : ScriptableObject, PInput.IPlayerActions
 {
     public InputButton attack = new InputButton();
+    public InputButton altattack = new InputButton();
     public InputButton crouch = new InputButton();
     public InputButton jump = new InputButton();
     public InputButton sprint = new InputButton();
     public InputButton weaponSlot = new InputButton();
 
+    public InputButton callDebugMenu = new InputButton();
+
     public int lastSlot;
 
     private PInput pinput;
-    [field:SerializeField] public Vector2 moveDirection { get; private set; }
-    [field:SerializeField] public Vector2 lookDelta { get; private set; }
+
+    public InputValue<Vector2> moveDir = new InputValue<Vector2>();
+    public InputValue<Vector2> lookDelta = new InputValue<Vector2>();
 
     public void OnEnable()
     {
@@ -81,12 +88,12 @@ public class PInputSO : ScriptableObject, PInput.IPlayerActions
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        moveDirection = context.ReadValue<Vector2>();
+        moveDir.Update(context);
     }
 
     public void OnLook(InputAction.CallbackContext context)
     {
-        lookDelta = context.ReadValue<Vector2>();
+        lookDelta.Update(context);
     }
 
     public void OnAttack(InputAction.CallbackContext context)
@@ -108,6 +115,12 @@ public class PInputSO : ScriptableObject, PInput.IPlayerActions
     {
         sprint.Update(context);
     }
+
+    public void OnCallDebugMenu(InputAction.CallbackContext context)
+    {
+        callDebugMenu.Update(context);
+    }
+
 
     public void SwitchWeaponSlot(int slot, InputAction.CallbackContext context)
     {
