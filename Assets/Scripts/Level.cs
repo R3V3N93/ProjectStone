@@ -6,7 +6,7 @@ public class Level : MonoBehaviour
 {
     public Player playerPawn;
     static public Level instance;
-    [field: SerializeField] public MapSO currentMap;
+    [field: SerializeField] public Map currentMap { private set; get; }
 
     [Header("Global Data")] 
     public GlobalSO globalSO;
@@ -14,48 +14,42 @@ public class Level : MonoBehaviour
     
     void Awake()
     {
-        if (instance) Destroy(gameObject);
+        if (instance)
+        {
+            Destroy(gameObject);
+            return;
+        }
         instance = this;
     }
-
-    void Start()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
     
-    Player SpawnPlayer(PlayerStart where)
+    Player SpawnPlayer(Transform where)
     {
         return Instantiate(Game.instance.prefabs.player, where.position, where.rotation).GetComponent<Player>();
-    }
-
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        Log.Debug("Game","Scene loaded");
-        switch (Game.instance.gameState)
-        {
-            case Game.GameStateT.Level:
-                break;
-        }
     }
     
     public void Load(MapSO what)
     {
         Log.Debug("Game", "Loading into level  " + what.label);
         
-        Game.instance.SetGameState(Game.GameStateT.Level);
-        
-        if(currentMap) SceneManager.UnloadSceneAsync(currentMap.sceneName);
-        
-        AsyncOperation op = SceneManager.LoadSceneAsync(what.sceneName, LoadSceneMode.Additive);
-        op.completed += LoadCompelete;
-        
-        currentMap = what;
+        if(currentMap) SceneManager.UnloadSceneAsync(currentMap.data.sceneName); 
+        // I always question to myself why do they not make a pointer to Scenes.
+        // It's always either string or int.
+        // You might think that int sounds fine, but actually the value is highly volatile.
+        // So volatile that Unity sometimes changes the scene order by itself.
+        // Probably I need to make a module that automatically maps Scenes to enum in runtime?
+        SceneManager.LoadSceneAsync(what.sceneName, LoadSceneMode.Additive);
     }
 
-    private void LoadCompelete(AsyncOperation op)
+    public void StartMap(Map from)
     {
-        Player spawnedPlayer = SpawnPlayer(currentMap.playerStart);
-        SetPlayerPawn(spawnedPlayer);
+        Game.instance.SetGameState(Game.GameStateT.Level);
+        currentMap = from;
+
+        if(from.data.DontSpawnPlayer == false)
+        {
+            Player spawnedPlayer = SpawnPlayer(currentMap.playerStart);
+            SetPlayerPawn(spawnedPlayer);
+        }
     }
     
     public void SetPlayerPawn(Player player)

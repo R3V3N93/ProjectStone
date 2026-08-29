@@ -13,6 +13,8 @@ public class Actor : MonoBehaviour
     void Awake()
     {
         if(!data) Log.Error(this.name, "I don't have its ScriptableObject defined. \nPossible NULL Errors!");
+        
+        MobjInit();
     }
     
     ////////////////////////////////////
@@ -20,11 +22,21 @@ public class Actor : MonoBehaviour
     ////////////////////////////////////
     
     [Header("Mobj")]
-    public uint health {get; set;}
-
-    public void TakeDamage(uint damage)
+    [field: SerializeField] public int health {get; private set;}
+    
+    public void SetHealth(int value)
     {
-        health = Math.Clamp(health - damage, 0, int.MaxValue);
+        health = (int)Math.Clamp(value, 0, data.maxHealth);
+    }
+
+    public void MobjInit()
+    {
+        SetHealth((int)data.maxHealth);
+    }
+    
+    public void TakeDamage(int damage)
+    {
+        health = (int)Math.Clamp(health - damage, 0, data.maxHealth);
 
         if (IsDead())
             Death();
@@ -32,7 +44,8 @@ public class Actor : MonoBehaviour
     
     public bool IsDead() { return health <= 0; }
 
-    public void Death() {}
-    
-    
+    public void Death()
+    {
+        Debug.Log(this.name + " is dead. Not big surprise.");
+    }
 }

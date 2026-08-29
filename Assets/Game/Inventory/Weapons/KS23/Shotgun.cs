@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 [RequireComponent(typeof(WeaponObject))]
@@ -30,5 +29,36 @@ public class Shotgun : MonoBehaviour, IPlayerWeapon, IGun
     {
         AudioClip[] clips = new []{sndFire};
         Sound.instance.PlaySFX(clips, this.transform);
+    }
+
+    public void TestFire()
+    {
+        Vector3 origin = weapon.v.transform.position;
+        Vector3 direction = weapon.v.transform.forward;
+        LayerMask layerMask = LayerMask.GetMask("Ground", "Enemy");
+        RaycastHit hitInfo;
+        
+        Physics.Raycast(origin, direction, hitInfo: out hitInfo, Mathf.Infinity, layerMask);
+        Debug.DrawRay(origin, direction, Color.red, 0.5f, false);
+        if (hitInfo.collider)
+        {
+            if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            {
+                Debug.Log("Enemy");
+                Actor a = hitInfo.transform.GetComponentInParent<Actor>();
+                if (!a)
+                {
+                    Debug.Log("Wtf");
+                    return;
+                }
+                
+                a.TakeDamage(10);
+            }
+            else
+            {
+                Debug.Log("ground");
+            }
+            
+        }
     }
 }

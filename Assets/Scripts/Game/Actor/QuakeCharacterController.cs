@@ -58,9 +58,9 @@ namespace QuakeLR
         private CharacterController m_CharacterController = null;
 
         private Vector3 m_WishMoveDirection = Vector3.zero;
-        private Vector3 m_Velocity = Vector3.zero;
+        public Vector3 m_Velocity = Vector3.zero;
         
-        private bool m_OnGround = true;
+        public bool m_OnGround = true;
         private bool m_RememberJump = false;
         
         private static readonly Vector3 k_XZPlane = new Vector3(1.0f, 0.0f, 1.0f);
@@ -139,7 +139,7 @@ namespace QuakeLR
             float bodyRadius = m_CharacterController.radius;
             float bodyHalfHeight = m_CharacterController.height * 0.5f;
 
-            Vector3 origin = transform.position;
+            Vector3 origin = m_CharacterController.center + transform.position;
             Vector3 sphereCheckPosition = origin - transform.up * (bodyHalfHeight - bodyRadius + m_CharacterController.skinWidth);
             
             m_OnGround = Physics.CheckSphere(sphereCheckPosition, bodyRadius, GroundMask.value);

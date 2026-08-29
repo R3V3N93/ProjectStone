@@ -24,10 +24,7 @@ public class Game : MonoBehaviour
     {
         if (instance) Destroy(gameObject);
 
-        SetGameState(GameStateT.MainMenu);
         instance = this;
-        
-        Menu.instance.Open(0, menus.title);
     }
 
     public void SetGameState(GameStateT to)

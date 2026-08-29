@@ -12,7 +12,15 @@ public class PlayerMovement : MonoBehaviour
     
     public Transform playerCamera;
     private float playerCameraPitch = 0f;
+    private float playerCamerRoll = 0f;
     public Vector2 lookSpeed = new Vector2(0.5f, 0.5f);
+    
+    float xRotation;
+    float yRotation;
+    
+    public float TiltSpeed;
+    public float TiltAngle;
+    private float TiltRoll;
 
     void Awake()
     {
@@ -51,14 +59,18 @@ public class PlayerMovement : MonoBehaviour
         // Y
         playerCameraPitch -= pinput.lookDelta.value.y * lookSpeed.y;
         playerCameraPitch = Mathf.Clamp(playerCameraPitch, -80.0f, 90.0f);
+        
+        //z
+        TiltRoll = -pinput.moveDir.value.x * TiltAngle;
+        playerCamerRoll = Mathf.Lerp(playerCamerRoll, TiltRoll, TiltSpeed * Time.deltaTime);
 
         playerCamera.localRotation =
-            Quaternion.Euler(playerCameraPitch, 0f, 0f);
+            Quaternion.Euler(playerCameraPitch, 0f, playerCamerRoll);
     }
-
+    
     void Move()
     {
-        Vector3 moveDirection = (playerCamera.forward * pinput.moveDir.value.y + playerCamera.right * pinput.moveDir.value.x);
+        Vector3 moveDirection = (transform.forward * pinput.moveDir.value.y + playerCamera.right * pinput.moveDir.value.x);
         controller.Move(moveDirection);
     }
 }

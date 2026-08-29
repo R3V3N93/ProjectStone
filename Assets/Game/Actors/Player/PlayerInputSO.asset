@@ -9,6 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 977d9f4d92c9c9347ba60874dac03552, type: 3}
+  m_Script: {fileID: 11500000, guid: abce61f8f7c037540b20d6f23c2a19d5, type: 3}
   m_Name: PlayerInputSO
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerInputSO
+  m_EditorClassIdentifier: Assembly-CSharp::PInputSO
+  lastSlot: 0

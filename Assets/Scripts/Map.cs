@@ -4,19 +4,19 @@ public class Map : MonoBehaviour
 {
     public MapSO data;
     
-    /*
-    public static void PauseGame()
+    public Transform playerStart;
+    
+    void Start()
     {
-        string debugFuncName = nameof(Pause) + "."+nameof(PauseGame);
-        
-        if (!Menu.instance)
-        {
-            Log.Error(debugFuncName, "<color=Yellow>Menu</color> singleton is destroyed or non existent!");
-            return;
-        }
+        RequestStartMap();
+    }
 
-        Menu m =  Menu.instance;
-        
-        m.Open();
-    }*/
+    void RequestStartMap()
+    {
+        string debugFuncName = this.gameObject.name + nameof(RequestStartMap);
+        Level l = Level.instance;
+        if(!l) Log.Error(debugFuncName, "Could not find Level manager instance! Did you forget to load <color=Yellow>Main</color> scene?");
+
+        l.StartMap(this);
+    }
 }

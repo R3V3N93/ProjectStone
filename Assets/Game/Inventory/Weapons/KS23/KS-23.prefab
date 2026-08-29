@@ -1,5 +1,37 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &734896462201514839
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 241562319041194366}
+  m_Layer: 7
+  m_Name: W
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &241562319041194366
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734896462201514839}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1788905511505905041}
+  m_Father: {fileID: 8287250788106566307}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2196644611794619042
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8287250788106566307}
   - component: {fileID: 7563585438396539913}
-  - component: {fileID: 1389163453379323821}
+  - component: {fileID: 6651131071500616418}
   m_Layer: 7
   m_Name: KS-23
   m_TagString: Untagged
@@ -31,8 +63,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1788905511505905041}
-  - {fileID: 310999955283094915}
+  - {fileID: 1893940785506642981}
+  - {fileID: 241562319041194366}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7563585438396539913
@@ -48,12 +80,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponObject
   <v>k__BackingField:
-    transform: {fileID: 310999955283094915}
+    transform: {fileID: 1893940785506642981}
     animator: {fileID: 6261811183609284617}
   <w>k__BackingField:
-    transform: {fileID: 1788905511505905041}
+    transform: {fileID: 241562319041194366}
     animator: {fileID: 803233684096892574}
---- !u!114 &1389163453379323821
+--- !u!114 &6651131071500616418
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -62,17 +94,49 @@ MonoBehaviour:
   m_GameObject: {fileID: 2196644611794619042}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26a6d961347c2784485b690631cc156d, type: 3}
+  m_Script: {fileID: 11500000, guid: e1bd526cc110e1a479286d0c6c1faedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shotgun
   sndFire: {fileID: 8300000, guid: 8ff474bd8d3abe54186e8e1165c0fe70, type: 3}
+--- !u!1 &4806931650409020018
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1893940785506642981}
+  m_Layer: 7
+  m_Name: V
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1893940785506642981
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4806931650409020018}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 310999955283094915}
+  m_Father: {fileID: 8287250788106566307}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5643813091860687658
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 8287250788106566307}
+    m_TransformParent: {fileID: 241562319041194366}
     m_Modifications:
     - target: {fileID: 376137121401300920, guid: 8dd42cfce9fbf934e97313e180757b63, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -156,7 +220,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6758340239048193025, guid: 8dd42cfce9fbf934e97313e180757b63, type: 3}
       propertyPath: m_Name
-      value: W
+      value: Model
       objectReference: {fileID: 0}
     - target: {fileID: 6758340239048193025, guid: 8dd42cfce9fbf934e97313e180757b63, type: 3}
       propertyPath: m_Layer
@@ -226,7 +290,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 8287250788106566307}
+    m_TransformParent: {fileID: 1893940785506642981}
     m_Modifications:
     - target: {fileID: 376137121401300920, guid: 8dd42cfce9fbf934e97313e180757b63, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -310,7 +374,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6758340239048193025, guid: 8dd42cfce9fbf934e97313e180757b63, type: 3}
       propertyPath: m_Name
-      value: V
+      value: Model
       objectReference: {fileID: 0}
     - target: {fileID: 6758340239048193025, guid: 8dd42cfce9fbf934e97313e180757b63, type: 3}
       propertyPath: m_Layer
@@ -343,7 +407,7 @@ PrefabInstance:
       addedObject: {fileID: 6261811183609284617}
     - targetCorrespondingSourceObject: {fileID: 6758340239048193025, guid: 8dd42cfce9fbf934e97313e180757b63, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8442191609777554292}
+      addedObject: {fileID: 5680092025604402072}
   m_SourcePrefab: {fileID: 100100000, guid: 8dd42cfce9fbf934e97313e180757b63, type: 3}
 --- !u!4 &310999955283094915 stripped
 Transform:
@@ -377,7 +441,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8442191609777554292
+--- !u!114 &5680092025604402072
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -386,6 +450,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1088521336248071993}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 181fb71526e2f5c4b9ea0a0546a3f2fc, type: 3}
+  m_Script: {fileID: 11500000, guid: afc4734f32fdbbe4db34e9f72214630b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
+  m_EditorClassIdentifier: Assembly-CSharp::ShotgunV
+  s: {fileID: 6651131071500616418}

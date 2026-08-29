@@ -1,8 +1,8 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Title : MonoBehaviour
 {
+    public MapSO hub;
     public void StartGame()
     {
         string debugFuncName = nameof(Title) + "."+nameof(StartGame);
@@ -23,6 +23,6 @@ public class Title : MonoBehaviour
         Level l = Level.instance;
 
         m.Close(0);
-        l.Load(l.mapList.cgrind);
+        l.Load(hub);
     }
 }

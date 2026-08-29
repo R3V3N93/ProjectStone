@@ -2,15 +2,10 @@ using UnityEngine;
 
 public class ShotgunV : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public Shotgun s;
+    void Fire()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        s.SoundFire();
+        s.TestFire();
     }
 }
