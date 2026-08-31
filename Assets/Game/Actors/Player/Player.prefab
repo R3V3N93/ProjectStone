@@ -103,8 +103,8 @@ GameObject:
   - component: {fileID: 1515398953496465540}
   - component: {fileID: 6176355190389949026}
   - component: {fileID: 2120109717044757376}
-  - component: {fileID: 2651036851049371104}
   - component: {fileID: 6792893729064468327}
+  - component: {fileID: 2651036851049371104}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -203,31 +203,6 @@ MonoBehaviour:
   lookSpeed: {x: 0.5, y: 0.5}
   TiltSpeed: 15
   TiltAngle: 1.5
---- !u!114 &2651036851049371104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2216957814977682750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85cff832f95f3cc4c9446dd3d1691db0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxWalkSpeed: 13
-  JumpPower: 9.64
-  Friction: 4
-  Gravity: 28.6
-  JumpBuffer: 0.15
-  m_MaxVel: 30
-  AccelerationSpeed: 10
-  StopSpeed: 3.57
-  GroundMask:
-    serializedVersion: 2
-    m_Bits: 64
-  m_Velocity: {x: 0, y: 0, z: 0}
-  m_OnGround: 1
 --- !u!114 &6792893729064468327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,6 +220,31 @@ MonoBehaviour:
   minFallVelocity: 15
   landingParticleSpawn: {fileID: 4193951261479082621, guid: f8cab69537f59d54e92d7bd8ba26041e, type: 3}
   wheretospawn: {fileID: 7847393709466621992}
+--- !u!114 &2651036851049371104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2216957814977682750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc18efef70bec92478a949cb318a1243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuakeLR.QuakeCharacterController
+  MaxWalkSpeed: 11.4
+  JumpPower: 9.64
+  Friction: 4
+  Gravity: 28.6
+  JumpBuffer: 0.15
+  m_MaxVel: 25
+  AccelerationSpeed: 10
+  StopSpeed: 3.57
+  GroundMask:
+    serializedVersion: 2
+    m_Bits: 64
+  m_Velocity: {x: 0, y: 0, z: 0}
+  m_OnGround: 1
 --- !u!1 &8051716684469586008
 GameObject:
   m_ObjectHideFlags: 0
